@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using OrdersScreen.ViewModels;
+using System.Collections.Generic;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace OrdersScreen.Views
@@ -9,6 +11,7 @@ namespace OrdersScreen.Views
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new OrdersViewModel();
         }
     }
 }
