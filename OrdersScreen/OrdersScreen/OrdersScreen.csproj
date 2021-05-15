@@ -9,10 +9,4 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Views\OrdersHistoryView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

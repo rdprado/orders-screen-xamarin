@@ -1,4 +1,5 @@
-﻿using OrdersScreen.Views;
+﻿using OrdersScreen.Mocks;
+using OrdersScreen.Views;
 using Xamarin.Forms;
 
 namespace OrdersScreen
@@ -9,7 +10,9 @@ namespace OrdersScreen
         public App()
         {
             InitializeComponent();
-            MainPage = new MainPage();
+            var mainPage = new MainPage();
+            MainPage = mainPage;
+            mainPage.ordersViewFeeder = new OrdersViewFeederMock();
         }
     }
 }
