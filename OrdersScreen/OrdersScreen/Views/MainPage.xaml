@@ -14,18 +14,24 @@
                 <Setter Property="TextColor" Value="#a6acbc" />
                 <Setter Property="FontSize" Value="11" />
             </Style>
+
+            <Color x:Key="PrimaryForegroundColor">#a6acbc</Color>
+
+            <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="#1a2030" />
+            <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="#2b333e" />
+            <SolidColorBrush x:Key="ListViewItemBackgroundBrush" Color="#252839" />
+            
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#252839" Padding="0" Margin="0" Spacing="0">
+        <StackLayout Background="{StaticResource PrimaryBackgroundBrush}" Padding="0" Margin="0" Spacing="0">
             <Button BackgroundColor="#aaa" x:Name="btnRunApp" Text="Run" Margin="0"></Button>
-
-            <Frame HeightRequest="40" BackgroundColor="#2b333e"  Padding="0">
-                <Label FontSize="16" Margin="14,0,0,0" TextColor="#a6acbc" VerticalTextAlignment="Center">Histórico</Label>
+            <Frame HeightRequest="40" Background="{StaticResource SecondaryBackgroundBrush}"  Padding="0">
+                <Label FontSize="16" Margin="14,0,0,0" TextColor="{StaticResource PrimaryForegroundColor}" VerticalTextAlignment="Center">Histórico</Label>
             </Frame>
             <BoxView HeightRequest="1.6" Color="#a6acbc"></BoxView>
-            <Frame BackgroundColor="#2b333e"  Padding="0">
+            <Frame Background="{StaticResource SecondaryBackgroundBrush}"  Padding="0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"></RowDefinition>
@@ -35,13 +41,13 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" FontSize="10" Margin="14,2,0,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="Start">ORDENS EM ABERTO</Label>
-                    <Label Grid.Row="0" Grid.Column="1" FontSize="10" Margin="0,2,2,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="End">Total Quantidade:</Label>
-                    <Label Grid.Row="0" Grid.Column="2" FontSize="10" Margin="0,2,14,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="Start" Text="{Binding OrdersCount}"></Label>
+                    <Label Grid.Row="0" Grid.Column="0" FontSize="10" Margin="14,2,0,0" TextColor="{StaticResource PrimaryForegroundColor}" VerticalOptions="Start" HorizontalOptions="Start">ORDENS EM ABERTO</Label>
+                    <Label Grid.Row="0" Grid.Column="1" FontSize="10" Margin="0,2,2,0" TextColor="{StaticResource PrimaryForegroundColor}" VerticalOptions="Start" HorizontalOptions="End">Total Quantidade:</Label>
+                    <Label Grid.Row="0" Grid.Column="2" FontSize="10" Margin="0,2,14,0" TextColor="{StaticResource PrimaryForegroundColor}" VerticalOptions="Start" HorizontalOptions="Start" Text="{Binding OrdersCount}"></Label>
                 </Grid>
             </Frame>
             <!-- DataGridHeader -->
-            <Frame BackgroundColor="#1a2030"  Padding="0">
+            <Frame Background="{StaticResource PrimaryBackgroundBrush}"  Padding="0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"></RowDefinition>
@@ -80,11 +86,11 @@
             </Frame>
             
             <!-- DataGridList -->
-            <ListView CachingStrategy="RecycleElement" ItemsSource="{Binding Orders}" BackgroundColor="#1a2030">
+            <ListView CachingStrategy="RecycleElement" ItemsSource="{Binding Orders}" Background="{StaticResource PrimaryBackgroundBrush}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame x:Name="ViewCellFrame" BackgroundColor="#252839" Padding="0">
+                            <Frame x:Name="ViewCellFrame" Background="{StaticResource ListViewItemBackgroundBrush}" Padding="0">
                                 <Grid ColumnSpacing="0" RowSpacing="0" Padding="0" Margin="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="20"></RowDefinition>
