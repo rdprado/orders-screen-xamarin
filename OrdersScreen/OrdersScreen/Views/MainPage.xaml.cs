@@ -15,6 +15,7 @@ namespace OrdersScreen.Views
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             BindingContext = vm;
 
@@ -36,6 +37,18 @@ namespace OrdersScreen.Views
         private void BtnAddOrder_Clicked(object sender, System.EventArgs e)
         {
             vm.AddOrder();
+        }
+        ViewCell lastCell;
+        private void ViewCell_Tapped(object sender, System.EventArgs e)
+        {
+            if (lastCell != null)
+                lastCell.View.BackgroundColor = Color.Transparent;
+            var viewCell = (ViewCell)sender;
+            if (viewCell.View != null)
+            {
+                viewCell.View.BackgroundColor = Color.Red;
+                lastCell = viewCell;
+            }
         }
     }
 }
