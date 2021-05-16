@@ -39,6 +39,19 @@ namespace OrdersScreen.ViewModels
             }
         }
 
+        public void UpdateOrder(Order order)
+        {
+            int index = orders.FindIndex(o => o.PlanName == order.PlanName);
+            if (index > -1)
+            {
+                var item = orders[index];
+                item.Charges = order.Charges;
+                item.DaysInWeek = order.DaysInWeek;
+                item.TotalDays = order.TotalDays;
+                orders[index] = item;
+            }
+        }
+
         public IList<Order> Orders { get => orders; }
     }
 }
