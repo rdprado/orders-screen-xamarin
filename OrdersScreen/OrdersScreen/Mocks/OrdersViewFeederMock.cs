@@ -23,78 +23,80 @@ namespace OrdersScreen.Mocks
         private const int maxIterations = 10000000;
         private const int maxAdds = 1000;
         private TimeSpan orderInterval = TimeSpan.FromMilliseconds(50);
+        private TimeSpan increasedLoadInterval = TimeSpan.FromSeconds(10);
 
         private readonly Random random = new Random();
         int currentOrderId = 0;
 
-        private static System.Timers.Timer increaseLoadTimer;
-
-        public void SetupIncreasedLoadSimulation(OrdersViewModel ordersVM)
-        {
-            //increaseLoadTimer = new System.Timers.Timer(TimeSpan.FromSeconds(10).TotalMilliseconds);
-            //// Hook up the Elapsed event for the timer. 
-            //increaseLoadTimer.Elapsed += (object source, ElapsedEventArgs args) => {
-            //    if (int.Parse(ordersVM.Count) > 100)
-            //    {
-            //        for (int i = 0; i < 90; i++)
-            //        {
-            //            SimulateUpdateOrder(ordersVM);
-            //        }
-            //    }
-            //};
-            //increaseLoadTimer.AutoReset = true;
-            //increaseLoadTimer.Enabled = true;
-        }
+        private static System.Timers.Timer timer;
 
         public void Start(OrdersViewModel ordersVM)
         {
-            int iterationsCount = 0;
             int addsCount = 0;
+            double increaseLoadTimeBankMilliSecs = 0;
 
-            var t = new Task(()=> {
-                while (iterationsCount++ < maxIterations)
+            timer = new System.Timers.Timer(orderInterval.TotalMilliseconds);
+            timer.Elapsed += (object source, ElapsedEventArgs args) =>
+            {
+                if (useIncreasedLoad)
                 {
-                    Thread.Sleep(orderInterval.Milliseconds);
-
-                    if (addsCount < maxAdds) // there is a limit to add to avoid full memory consumption
+                    increaseLoadTimeBankMilliSecs += orderInterval.TotalMilliseconds;
+                    if (increaseLoadTimeBankMilliSecs > increasedLoadInterval.TotalMilliseconds)
                     {
-                        // Add and/or update
-
-                        var chanceToCreate = random.Next(1, 10);
-                        if (chanceToCreate % 5 == 1)
-                        {
-                            // add
-                            SimulateAddOrder(ordersVM);
-
-                            if (chanceToCreate <= 5)
-                            {
-                                // and update
-                                SimulateUpdateOrder(ordersVM);
-                            }
-
-                            addsCount++;
-                        }
-                        else
-                        {
-                            // or update
-                            SimulateUpdateOrder(ordersVM);
-                        }
-                    }
-                    else
-                    {
-                        // can only update
-
-                        SimulateUpdateOrder(ordersVM);
+                        increaseLoadTimeBankMilliSecs = 0;
+                        TryToIncreaseLoad(ordersVM);
                     }
                 }
-            });
 
-            t.Start();
 
-            if (useIncreasedLoad)
+                if (addsCount < maxAdds) // limit to add to avoid full memory consumption
+                {
+                    addsCount = SimulateAddAndOrUpdateOrder(ordersVM, addsCount);
+                }
+                else
+                {
+                    SimulateUpdateOrder(ordersVM);
+                }
+            };
+            timer.AutoReset = true;
+            timer.Enabled = true;
+        }
+
+        private void TryToIncreaseLoad(OrdersViewModel ordersVM)
+        {
+            if (int.Parse(ordersVM.Count) > 100)
             {
-                SetupIncreasedLoadSimulation(ordersVM);
+                for (int i = 0; i < 90; i++)
+                {
+                    SimulateUpdateOrder(ordersVM);
+                }
             }
+        }
+
+        private int SimulateAddAndOrUpdateOrder(OrdersViewModel ordersVM, int addsCount)
+        {
+            // Add and/or update
+
+            var chanceToCreate = random.Next(1, 10);
+            if (chanceToCreate % 5 == 1)
+            {
+                // add
+                SimulateAddOrder(ordersVM);
+                addsCount++;
+
+                if (chanceToCreate <= 5)
+                {
+                    // and update
+                    SimulateUpdateOrder(ordersVM);
+                }
+            }
+            else
+            {
+                // or just update
+                SimulateUpdateOrder(ordersVM);
+            }
+
+            return addsCount;
         }
 
         private int SimulateAddOrder(OrdersViewModel viewModel)
