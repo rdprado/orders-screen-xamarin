@@ -1,58 +1,85 @@
-﻿using OrdersScreen.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using OrdersScreen.Utils;
-using Xamarin.Forms;
 
 namespace OrdersScreen.ViewModels
 {
-    public class OrdersViewModel
+    public class OrdersViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Order> orders = new ObservableCollection<Order>();
+        public ObservableCollection<OrderViewModel> orders = new ObservableCollection<OrderViewModel>();
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public OrdersViewModel()
         {
-            Orders.Add(new Order { PlanName = "AAA", Charges = "2", TotalDays = "0", DaysInWeek = "40" });
-            Orders.Add(new Order { PlanName = "BBB", Charges = "2", TotalDays = "0", DaysInWeek = "40" });
-            Orders.Add(new Order { PlanName = "CCC", Charges = "2", TotalDays = "0", DaysInWeek = "40" });
-            Orders.Add(new Order { PlanName = "DDD", Charges = "2", TotalDays = "0", DaysInWeek = "40" });
+            Orders.Add(new OrderViewModel { Id = "AAA", CreationDate = "25/05/2020 19:40:56", Account = "333333", Symbol = "HGLG45", OrdType="C"  , OrdQty = "1", LeavesQty = "1", CumQty ="0", AvailableValue="7,00", TotalValue = "7,00", GoalValue="9,00" });
+            Orders.Add(new OrderViewModel { Id = "BBB", CreationDate = "25/05/2020 19:41:56", Account = "333333", Symbol = "HGLG45", OrdType = "C", OrdQty = "1", LeavesQty = "1",   CumQty = "0", AvailableValue = "7,00", TotalValue = "7,00", GoalValue = "9,00" });
+            Orders.Add(new OrderViewModel { Id = "CCC", CreationDate = "25/05/2020 19:42:56", Account = "333333", Symbol = "HGLG45", OrdType = "C", OrdQty = "1", LeavesQty = "1",   CumQty = "0", AvailableValue = "7,00", TotalValue = "7,00", GoalValue = "9,00" });
+            Orders.Add(new OrderViewModel { Id = "DDD", CreationDate = "25/05/2020 19:43:56", Account = "333333", Symbol = "HGLG45", OrdType = "C", OrdQty = "1", LeavesQty = "1",   CumQty = "0", AvailableValue = "7,00", TotalValue="7,00", GoalValue = "9,00" });
         }
 
-        public void AddOrder(Order order)
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null ){
+                PropertyChanged(this,
+                    new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public void AddOrder(OrderViewModel order)
         {
             Orders.Add(order);
+            this.OnPropertyChanged("Count");
         }
 
         public void AddOrder()
         {
-            Orders.Add(new Order { PlanName = "AAA", Charges = "2", TotalDays = "0", DaysInWeek = "40" });
+            Orders.Add(new OrderViewModel { Id = "AAA", CreationDate = "2", Account = "0", Symbol = "40" });
+            this.OnPropertyChanged("Count");
         }
 
         public void UpdateOrder()
         {
-            int index = orders.FindIndex(o => o.PlanName == "AAA");
+            int index = orders.FindIndex(o => o.Id == "AAA");
             if (index > -1)
             {
                 var item = orders[index];
-                item.Charges = "Smith";
+                item.CreationDate = "Smith";
                 orders[index] = item;
             }
         }
 
-        public void UpdateOrder(Order order)
+        //public void UpdateOrder(OrderViewModel order)
+        //{
+        //    order.Update();
+        //}
+
+        internal OrderViewModel GetOrderVMByIndex(int index)
         {
-            int index = orders.FindIndex(o => o.PlanName == order.PlanName);
-            if (index > -1)
-            {
-                var item = orders[index];
-                item.Charges = order.Charges;
-                item.DaysInWeek = order.DaysInWeek;
-                item.TotalDays = order.TotalDays;
-                orders[index] = item;
-            }
+            return orders[index];
+
+            //return new OrderViewModel
+            //{
+            //    Id              = vm.Id,
+            //    CreationDate    = vm.CreationDate,
+            //    Advisor         = vm.Advisor,
+            //    Account         = vm.Account,
+            //    Symbol          = vm.Symbol,
+            //    OrdType         = vm.OrdType,
+            //    OrdQty          = vm.OrdQty,
+            //    OrdQtyApparent  = vm.OrdQtyApparent,
+            //    LeavesQty       = vm.LeavesQty,
+            //    CancelledQty    = vm.CancelledQty,
+            //    CumQty          = vm.CumQty,
+            //    TotalValue      = vm.TotalValue,
+            //    AvailableValue  = vm.AvailableValue,
+            //    GoalValue       = vm.GoalValue,
+            //};
         }
 
-        public IList<Order> Orders { get => orders; }
+        public IList<OrderViewModel> Orders { get => orders; }
+
+        public string Count { get => orders.Count.ToString(); }
     }
 }
