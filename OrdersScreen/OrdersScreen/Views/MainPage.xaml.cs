@@ -19,36 +19,7 @@ namespace OrdersScreen.Views
 
             BindingContext = vm;
 
-            btnRunApp.Clicked += BtnRunApp_Clicked;
-            btnAddOrder.Clicked += BtnAddOrder_Clicked;
-            btnUpdateOrder.Clicked += BtnUpdateOrder_Clicked;
-        }
-
-        private void BtnRunApp_Clicked(object sender, System.EventArgs e)
-        {
-            ordersViewFeeder.Start(vm);
-        }
-
-        private void BtnUpdateOrder_Clicked(object sender, System.EventArgs e)
-        {
-            vm.UpdateOrder();
-        }
-
-        private void BtnAddOrder_Clicked(object sender, System.EventArgs e)
-        {
-            vm.AddOrder();
-        }
-        ViewCell lastCell;
-        private void ViewCell_Tapped(object sender, System.EventArgs e)
-        {
-            if (lastCell != null)
-                lastCell.View.BackgroundColor = Color.Transparent;
-            var viewCell = (ViewCell)sender;
-            if (viewCell.View != null)
-            {
-                viewCell.View.BackgroundColor = Color.Red;
-                lastCell = viewCell;
-            }
+            btnRunApp.Clicked += (object sender, System.EventArgs e) => ordersViewFeeder.Start(vm);
         }
     }
 }

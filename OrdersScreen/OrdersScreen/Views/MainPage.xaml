@@ -20,8 +20,6 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="#252839" Padding="0" Margin="0" Spacing="0">
             <Button BackgroundColor="#aaa" x:Name="btnRunApp" Text="Run" Margin="0"></Button>
-            <Button BackgroundColor="#aaa" x:Name="btnAddOrder" Text="AddOrder"></Button>
-            <Button BackgroundColor="#aaa" x:Name="btnUpdateOrder" Text="UpdateOrder"></Button>
 
             <Frame HeightRequest="40" BackgroundColor="#2b333e"  Padding="0">
                 <Label FontSize="16" Margin="14,0,0,0" TextColor="#a6acbc" VerticalTextAlignment="Center">Histórico</Label>
@@ -39,7 +37,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" FontSize="10" Margin="14,2,0,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="Start">ORDENS EM ABERTO</Label>
                     <Label Grid.Row="0" Grid.Column="1" FontSize="10" Margin="0,2,2,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="End">Total Quantidade:</Label>
-                    <Label Grid.Row="0" Grid.Column="2" FontSize="10" Margin="0,2,14,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="Start" Text="{Binding Count}"></Label>
+                    <Label Grid.Row="0" Grid.Column="2" FontSize="10" Margin="0,2,14,0" TextColor="#a6acbc" VerticalOptions="Start" HorizontalOptions="Start" Text="{Binding OrdersCount}"></Label>
                 </Grid>
             </Frame>
             <!-- DataGridHeader -->
@@ -85,7 +83,7 @@
             <ListView CachingStrategy="RecycleElement" ItemsSource="{Binding Orders}" BackgroundColor="#1a2030">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Tapped="ViewCell_Tapped">
+                        <ViewCell>
                             <Frame x:Name="ViewCellFrame" BackgroundColor="#252839" Padding="0">
                                 <Grid ColumnSpacing="0" RowSpacing="0" Padding="0" Margin="0">
                                     <Grid.RowDefinitions>

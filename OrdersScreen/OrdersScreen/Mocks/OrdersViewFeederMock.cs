@@ -20,8 +20,7 @@ namespace OrdersScreen.Mocks
         public List<string> fakeOrdTypes
             = new List<string> { "1", "2", "3", "C"};
 
-        private const int maxIterations = 10000000;
-        private const int maxAdds = 1000;
+        private const int maxAdds = 100000;
         private TimeSpan orderInterval = TimeSpan.FromMilliseconds(50);
         private TimeSpan increasedLoadInterval = TimeSpan.FromSeconds(10);
 
@@ -64,9 +63,11 @@ namespace OrdersScreen.Mocks
 
         private void TryToIncreaseLoad(OrdersViewModel ordersVM)
         {
-            if (int.Parse(ordersVM.Count) > 100)
+            var ordersCount = int.Parse(ordersVM.OrdersCount);
+            if (ordersCount > 100)
             {
-                for (int i = 0; i < 90; i++)
+                var numUpdates = ordersCount * 0.3;
+                for (int i = 0; i < numUpdates; i++)
                 {
                     SimulateUpdateOrder(ordersVM);
                 }
@@ -158,15 +159,29 @@ namespace OrdersScreen.Mocks
             // from the view model list and update the values with 
             // a dummy logic.
             // ---------------------------------------------------
+            
+            // Choose a random order to update...
             var randIndexToUpdate = random.Next(0, currentOrderId - 1);
+            var orderVM = ordersViewModel.GetOrderVMByIndex(randIndexToUpdate); // O(1)
 
-            var orderVM = ordersViewModel.GetOrderVMByIndex(randIndexToUpdate);
+            // but simulate as if we had to find the order using the ID
+            orderVM = ordersViewModel.GetOrderVMByID(orderVM.Id);
+
             var cumQtyToUpdate = int.Parse(orderVM.CumQty);
             cumQtyToUpdate = int.Parse(orderVM.LeavesQty) > 0 ? cumQtyToUpdate + 1 : cumQtyToUpdate;
             orderVM.CumQty = cumQtyToUpdate.ToString();
             orderVM.LeavesQty = (int.Parse(orderVM.OrdQty) - cumQtyToUpdate).ToString();
-            orderVM.TotalValue = random.Next(0, 1000).ToString();
-            orderVM.AvailableValue = random.Next(0, 1000).ToString();
+            
+            // do some random chance to update the following fields
+            var chanceToUpdateValues = random.Next(1, 10);
+            if (chanceToUpdateValues % 2 == 1)
+            {
+                orderVM.TotalValue = random.Next(0, 1000).ToString();
+            }
+            if (chanceToUpdateValues % 3 == 1)
+            {
+                orderVM.AvailableValue = random.Next(0, 1000).ToString();
+            }
             orderVM.GoalValue = random.Next(0, 1000).ToString();
             Application.Current.Dispatcher.BeginInvokeOnMainThread(() => orderVM.Update());
         }
