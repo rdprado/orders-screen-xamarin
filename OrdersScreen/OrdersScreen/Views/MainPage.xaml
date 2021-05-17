@@ -16,7 +16,6 @@
             </Style>
 
             <Color x:Key="PrimaryForegroundColor">#a6acbc</Color>
-
             <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="#1a2030" />
             <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="#2b333e" />
             <SolidColorBrush x:Key="ListViewItemBackgroundBrush" Color="#252839" />
@@ -46,92 +45,111 @@
                     <Label Grid.Row="0" Grid.Column="2" FontSize="10" Margin="0,2,14,0" TextColor="{StaticResource PrimaryForegroundColor}" VerticalOptions="Start" HorizontalOptions="Start" Text="{Binding OrdersCount}"></Label>
                 </Grid>
             </Frame>
-            <!-- DataGridHeader -->
-            <Frame Background="{StaticResource PrimaryBackgroundBrush}"  Padding="0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="28"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="120"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">Id</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center">DATA E HORA</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">ASSESSOR</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">CONTA</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center">ATIVO</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center">TIPO</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center">QTD.</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="7" HorizontalOptions="Center" VerticalOptions="Center">QTD. APARENTE</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="8" HorizontalOptions="Center" VerticalOptions="Center">QTD. DISP</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="9" HorizontalOptions="Center" VerticalOptions="Center">QTD. CANCEL</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="10" HorizontalOptions="Center" VerticalOptions="Center">QTD. EXEC</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="11" HorizontalOptions="Center" VerticalOptions="Center">VALOR</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="12" HorizontalOptions="Center" VerticalOptions="Center">VALOR DISP</Label>
-                    <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="13" HorizontalOptions="Center" VerticalOptions="Center">OBJETIVO</Label>
-                </Grid>
-            </Frame>
-            
-            <!-- DataGridList -->
-            <ListView CachingStrategy="RecycleElement" ItemsSource="{Binding Orders}" Background="{StaticResource PrimaryBackgroundBrush}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame x:Name="ViewCellFrame" Background="{StaticResource ListViewItemBackgroundBrush}" Padding="0">
-                                <Grid ColumnSpacing="0" RowSpacing="0" Padding="0" Margin="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="120"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Text="{Binding Id}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Center" Grid.Column="1" Text="{Binding CreationDate}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="2" Text="{Binding Advisor}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Text="{Binding Account}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="4" Text="{Binding Symbol}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Text="{Binding OrdType}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="6" Text="{Binding OrdQty}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="7" Text="{Binding OrdQtyApparent}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="8" Text="{Binding LeavesQty}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="9" Text="{Binding CancelledQty}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="10" Text="{Binding CumQty}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="11" Text="{Binding TotalValue}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="12" Text="{Binding AvailableValue}"></Label>
-                                    <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="13" Text="{Binding GoalValue}"></Label>
-                                </Grid>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1060"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                    <!-- DataGridHeader -->
+                    <Frame Background="{StaticResource PrimaryBackgroundBrush}"  Padding="0">
+                        <Grid ColumnSpacing="0" RowSpacing="0" Padding="0" Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center"    VerticalOptions="Center">Id</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="1"  HorizontalOptions="Start"     VerticalOptions="Center">DATA E HORA</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="2"  HorizontalOptions="Center"    VerticalOptions="Center">ASSESSOR</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="3"  HorizontalOptions="Center"    VerticalOptions="Center">CONTA</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="4"  HorizontalOptions="Center"    VerticalOptions="Center">ATIVO</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="5"  HorizontalOptions="Center"    VerticalOptions="Center">TIPO</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="6"  HorizontalOptions="End"       VerticalOptions="Center">QTD.</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="7"  HorizontalOptions="End"       VerticalOptions="Center">QTD. APARENTE</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="8"  HorizontalOptions="End"       VerticalOptions="Center">QTD. DISP</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="9"  HorizontalOptions="End"       VerticalOptions="Center">QTD. CANCEL</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="10" HorizontalOptions="End"      VerticalOptions="Center">QTD. EXEC</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="11" HorizontalOptions="End"      VerticalOptions="Center">VALOR</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="12" HorizontalOptions="End"      VerticalOptions="Center">VALOR DISP</Label>
+                            <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="13" HorizontalOptions="End"      VerticalOptions="Center">OBJETIVO</Label>
+                        </Grid>
+                    </Frame>
+
+                    <!-- DataGridList -->
+                    <ListView CachingStrategy="RecycleElement" ItemsSource="{Binding Orders}" SeparatorVisibility="None" Background="{StaticResource PrimaryBackgroundBrush}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame x:Name="ViewCellFrame" Background="{StaticResource ListViewItemBackgroundBrush}" Padding="0">
+                                        <Grid ColumnSpacing="0" RowSpacing="0" Padding="0" Margin="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Text="{Binding Id }"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Start"  VerticalOptions="Center" Grid.Column="1" Text="{Binding CreationDate}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Start" Grid.Column="2" Text="{Binding Advisor}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="3" Text="{Binding Account}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="4" Text="{Binding Symbol}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="5" Text="{Binding OrdType}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="6" Text="{Binding OrdQty}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="7" Text="{Binding OrdQtyApparent}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="8" Text="{Binding LeavesQty}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="9" Text="{Binding CancelledQty}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="10" Text="{Binding CumQty}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="11" Text="{Binding TotalValue}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="12" Text="{Binding AvailableValue}"></Label>
+                                            <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="End"    VerticalOptions="Center" Grid.Column="13" Text="{Binding GoalValue}"></Label>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+
+                </StackLayout>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

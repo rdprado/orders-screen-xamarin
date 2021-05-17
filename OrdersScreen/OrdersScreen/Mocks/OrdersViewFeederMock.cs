@@ -20,7 +20,7 @@ namespace OrdersScreen.Mocks
         public List<string> fakeOrdTypes
             = new List<string> { "1", "2", "3", "C"};
 
-        private const int maxAdds = 100000;
+        private const int maxAdds = 200;
         private TimeSpan orderInterval = TimeSpan.FromMilliseconds(50);
         private TimeSpan increasedLoadInterval = TimeSpan.FromSeconds(10);
 
@@ -37,15 +37,15 @@ namespace OrdersScreen.Mocks
             timer = new System.Timers.Timer(orderInterval.TotalMilliseconds);
             timer.Elapsed += (object source, ElapsedEventArgs args) =>
             {
-                if (useIncreasedLoad)
-                {
-                    increaseLoadTimeBankMilliSecs += orderInterval.TotalMilliseconds;
-                    if (increaseLoadTimeBankMilliSecs > increasedLoadInterval.TotalMilliseconds)
-                    {
-                        increaseLoadTimeBankMilliSecs = 0;
-                        TryToIncreaseLoad(ordersVM);
-                    }
-                }
+                //if (useIncreasedLoad)
+                //{
+                //    increaseLoadTimeBankMilliSecs += orderInterval.TotalMilliseconds;
+                //    if (increaseLoadTimeBankMilliSecs > increasedLoadInterval.TotalMilliseconds)
+                //    {
+                //        increaseLoadTimeBankMilliSecs = 0;
+                //        TryToIncreaseLoad(ordersVM);
+                //    }
+                //}
 
 
                 if (addsCount < maxAdds) // limit to add to avoid full memory consumption
@@ -79,8 +79,8 @@ namespace OrdersScreen.Mocks
             // Add and/or update
 
             var chanceToCreate = random.Next(1, 10);
-            if (chanceToCreate % 5 == 1)
-            {
+            //if (chanceToCreate % 2 == 0)
+            //{
                 // add
                 SimulateAddOrder(ordersVM);
                 addsCount++;
@@ -88,14 +88,14 @@ namespace OrdersScreen.Mocks
                 if (chanceToCreate <= 5)
                 {
                     // and update
-                    SimulateUpdateOrder(ordersVM);
+                    //SimulateUpdateOrder(ordersVM);
                 }
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 // or just update
-                SimulateUpdateOrder(ordersVM);
-            }
+                //SimulateUpdateOrder(ordersVM);
+            //}
 
             return addsCount;
         }
