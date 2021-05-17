@@ -70,12 +70,12 @@
                                 <ColumnDefinition Width="60"></ColumnDefinition>
                                 <ColumnDefinition Width="60"></ColumnDefinition>
                                 <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="90"></ColumnDefinition>
+                                <ColumnDefinition Width="70"></ColumnDefinition>
                                 <ColumnDefinition Width="80"></ColumnDefinition>
                                 <ColumnDefinition Width="60"></ColumnDefinition>
-                                <ColumnDefinition Width="80"></ColumnDefinition>
                                 <ColumnDefinition Width="60"></ColumnDefinition>
-                                <ColumnDefinition Width="60"></ColumnDefinition>
-                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="70"></ColumnDefinition>
                                 <ColumnDefinition Width="60"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Label Style="{StaticResource OrderHeaderLblStyle}" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center"    VerticalOptions="Center">Id</Label>
@@ -112,13 +112,13 @@
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="90"></ColumnDefinition>
+                                                <ColumnDefinition Width="70"></ColumnDefinition>
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
                                                 <ColumnDefinition Width="80"></ColumnDefinition>
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
-                                                <ColumnDefinition Width="80"></ColumnDefinition>
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
-                                                <ColumnDefinition Width="60"></ColumnDefinition>
-                                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                                <ColumnDefinition Width="70"></ColumnDefinition>
                                                 <ColumnDefinition Width="60"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <Label Style="{StaticResource OrderLblStyle}" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Text="{Binding Id }"></Label>

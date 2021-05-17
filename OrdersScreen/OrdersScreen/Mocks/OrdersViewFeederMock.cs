@@ -20,7 +20,7 @@ namespace OrdersScreen.Mocks
         public List<string> fakeOrdTypes
             = new List<string> { "1", "2", "3", "C"};
 
-        private const int maxAdds = 200;
+        private const int maxAdds = 1000;
         private TimeSpan orderInterval = TimeSpan.FromMilliseconds(50);
         private TimeSpan increasedLoadInterval = TimeSpan.FromSeconds(10);
 
@@ -37,16 +37,15 @@ namespace OrdersScreen.Mocks
             timer = new System.Timers.Timer(orderInterval.TotalMilliseconds);
             timer.Elapsed += (object source, ElapsedEventArgs args) =>
             {
-                //if (useIncreasedLoad)
-                //{
-                //    increaseLoadTimeBankMilliSecs += orderInterval.TotalMilliseconds;
-                //    if (increaseLoadTimeBankMilliSecs > increasedLoadInterval.TotalMilliseconds)
-                //    {
-                //        increaseLoadTimeBankMilliSecs = 0;
-                //        TryToIncreaseLoad(ordersVM);
-                //    }
-                //}
-
+                if (useIncreasedLoad)
+                {
+                    increaseLoadTimeBankMilliSecs += orderInterval.TotalMilliseconds;
+                    if (increaseLoadTimeBankMilliSecs > increasedLoadInterval.TotalMilliseconds)
+                    {
+                        increaseLoadTimeBankMilliSecs = 0;
+                        TryToIncreaseLoad(ordersVM);
+                    }
+                }
 
                 if (addsCount < maxAdds) // limit to add to avoid full memory consumption
                 {
@@ -79,8 +78,8 @@ namespace OrdersScreen.Mocks
             // Add and/or update
 
             var chanceToCreate = random.Next(1, 10);
-            //if (chanceToCreate % 2 == 0)
-            //{
+            if (chanceToCreate % 2 == 0)
+            {
                 // add
                 SimulateAddOrder(ordersVM);
                 addsCount++;
@@ -90,12 +89,12 @@ namespace OrdersScreen.Mocks
                     // and update
                     //SimulateUpdateOrder(ordersVM);
                 }
-            //}
-            //else
-            //{
+            }
+            else
+            {
                 // or just update
-                //SimulateUpdateOrder(ordersVM);
-            //}
+                SimulateUpdateOrder(ordersVM);
+            }
 
             return addsCount;
         }
@@ -174,11 +173,11 @@ namespace OrdersScreen.Mocks
             
             // do some random chance to update the following fields
             var chanceToUpdateValues = random.Next(1, 10);
-            if (chanceToUpdateValues % 2 == 1)
+            if (chanceToUpdateValues % 2 == 0)
             {
                 orderVM.TotalValue = random.Next(0, 1000).ToString();
             }
-            if (chanceToUpdateValues % 3 == 1)
+            if (chanceToUpdateValues % 3 == 0)
             {
                 orderVM.AvailableValue = random.Next(0, 1000).ToString();
             }
