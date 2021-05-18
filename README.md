@@ -81,4 +81,7 @@ Xamarin.Forms mais recente
 - Compilação
 Foi constatado que com essas verões utilizadas a compilação dos projetos em Release é muito mais lenta do que em Debug
 
+- Erros
+Apenas no UWP aparece esse erro a ser investigado, apesar de funcionar ok.
+![image](https://user-images.githubusercontent.com/5822726/118736305-a14f8080-b818-11eb-8507-571c4712dd82.png)
 
