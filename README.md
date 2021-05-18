@@ -22,6 +22,7 @@ But, it was also noticed that with a limit for the number of crated order, after
 There is one thread for the mock timer -- adding and/or updating orders -- and the UI thread. Since updating didn't seem to overload de UI thread, the multiple BeginInvoke calls to execute the add or update operations in the UI thread didn't seem to be a problem. Below are the results and analysis.
 
 1- Memory consumption  
+
 Visible order rows without scroll: 32  
 
 |   | 0 orders| 1000 orders | 10000 orders |
@@ -29,6 +30,15 @@ Visible order rows without scroll: 32
 |UWP| 34 MB   | 290 MB      |              |
 |WPF| 109 MB  | 870 MB      |     > 3GB    |
 
+
+
+
+
+
+
+
+
+______________________________________________________________________
 Visible order rows without scroll: 10  
 
 |   | 0 orders| 1000 orders | 10000 orders |
@@ -36,9 +46,9 @@ Visible order rows without scroll: 10
 |UWP| 34 MB   | 290 MB      |              |
 |WPF| 109 MB  | 870 MB      |              |
 
-With the tables above it could be seen that even with the ListView having a caching strategy of recycling rows, the amount of rows visible at the same time is a major factor in memory consumption.
+With the results above it could be seen that even with the ListView having a caching strategy of recycling rows, the amount of rows visible at the same time is a major factor to high memory consumption.
 
-Reduce the amount of row fieds to one
+Reduced number of orders fields -- order view model having only one field, like Id for example.
 
 |   | 0 orders| 1000 orders | 10000 orders |
 |---| --------|-------------|--------------|
