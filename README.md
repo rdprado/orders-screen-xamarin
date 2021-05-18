@@ -9,7 +9,7 @@ The first phase was building a screen with orders in a datagrid style view. Unli
 In the end, the visual was as expected. A fix was needed in the WPF project App.xaml to remove the undesired left margin for the listViewItems. Also the listview horizontal size was fixed because a bug was identified in UWP when manually resizing the window while adding and updating the listview. It could be fixed just for UWP. The challenge here with a listview was to make the header columns the same size as the listview item columns. To simplify the width of the cells were set to a fixed width.
 
 ## 2- Mock to load the view with entries ##
-For this phase was created an interface called OrdersScreenFeeder and a mock implementation to feed the view. This way it was possible for the Xamarin's App.xaml to inject the mock in the view and in the future to inject real services to fetch or receive data. Also the mock could be in different projects. 
+For this phase it was created an interface called OrdersScreenFeeder and a mock implementation to feed the view. This way it was possible for the Xamarin's App.xaml to inject the mock in the view and in the future it would be possible to inject real services to fetch or receive data. Also the mock could be in different projects. 
 
 The MVVM pattern was used as recommended in https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding with the listview itemsource binded to an ObservableCollection to automatically update the view when rows were added or removed. The ordersviewmodel collection has order viewmodels in this example. It could have the order model directly, but it was just a project decision to keep the model layer separate from view.
 
