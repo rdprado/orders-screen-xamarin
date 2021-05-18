@@ -67,3 +67,18 @@ Com isso, o alvo do problema parece ter sido encontrado e está em adicionar ent
 
 
 2- CPU performance
+
+## Notas ## 
+- Máquina usada para testes:
+Intel(R) Core(TM) i7-9750H @2.60Hz
+RAM 16GB
+
+- Versões utilizadas:
+Visual Studio 2019
+WPF Core 3.1 e WPF Framework 4.72
+Xamarin.Forms mais recente
+
+- Compilação
+Foi constatado que com essas verões utilizadas a compilação dos projetos em Release é muito mais lenta do que em Debug
+
+
