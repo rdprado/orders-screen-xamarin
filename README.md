@@ -16,13 +16,23 @@ The MVVM pattern was used as recommended in https://docs.microsoft.com/en-us/xam
 The created mock uses a timer and every 50ms adds an order in the observable collection or updates one order or both. And every 10 seconds simualtes a higher load of updates -- 30% of the existing orders are updated.
 
 ## 3- Performance and memory consumption ##
-The first impressions were that the UWP application was performing better than the WPF one while rows were being added and/or updated. When dragging or scrolling the screen the UWP app was working smoothly and the WPF app freezing a bit. Also examining the memory profiler it was possible to notice a big increase of memory while the rows were being added.
-It was also noticed that with a limit for the order creation, after all orders were created, the WPF app performance would be good again what was an indication of the order creation being a bottleneck.
+The first impressions were that the UWP application was performing better than the WPF one while rows were being added and/or updated. When dragging or scrolling the screen the UWP app was working smoothly and the WPF app freezing a bit. Also examining the memory profiler it was possible to notice a big increase of memory for both apps while the rows were being added.
+But, it was also noticed that with a limit for the order creation, after all orders were created, the WPF app performance would be better again what was an indication of the order creation being a bottleneck and not the updates.
 
 There is one thread for the mock timer -- adding and/or updating orders -- and the UI thread. Since updating didn't seem to overload de UI thread, the BeginInvoke calls to execute the add or update operations in the UI thread didn't look to be a problem, as sometimes it can be. Below are the results and analysis.
 
-Orders: 1000
-Updates: infinite
-Space for order rows : 32
+Memory consumption 
 
+Orders: 0 (application start)  
+Updates: infinite  
+Space for order rows : 32  
+
+- UWP: 34 MB  
+- WPF:  
+
+Orders: 1000  
+Updates: infinite  
+Space for order rows : 32  
+- UWP: 290 MB  
+- WPF: 
 
