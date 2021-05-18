@@ -1,5 +1,5 @@
 # orders-screen-xamarin
-Projeto Xamarin para testar a criação de uma aplicação cross-platform para WPF e UWP usando um datagrid view contendo dados de ordens do mercado de ações. Entradas podem ser adicionadas ou atualizadas na view.
+Projeto Xamarin para testar a criação de uma aplicação cross-platform em WPF e UWP usando um datagrid view contendo dados de exemplo de ordens do mercado de ações. Entradas podem ser adicionadas ou atualizadas na UI.
 
 ## 1- Layout ##
 A primeira fase foi construir uma tela com ordens em uma view com estilo de datagrid. Diferente do WPF ou Windows Forms o Xamarin não inclui um controle de datagrid nativo e, então, as opções seriam usar uma solução não nativa existente contra criar uma nova. Foram encontrados alguns pacotes com datagrid views, como da SyncFusion que diz ter uma solução de alta performance, mas sua licença é comercial. Foi encontrado também um pacote akgulebubekir/Xamarin.Forms.DataGrid não suportado por WPF. Então, foi decidido criar uma solução simples utilizando o controle ListView.
@@ -63,10 +63,19 @@ while (i++ < 10000)
     orders.Add(new OrderViewModel());
 }
 ```
-Com isso, o alvo do problema parece ter sido encontrado e está em adicionar entradas após o itemSource já ter sido definido e o não reuso de células. A criação de células novas com todas as estruturas de evento e binding por célula para manter a lista responsiva gastam muita memória. Foram tentadas outras versões do Xamarin.Forms, com o mesmo resultado. Também foi tentado criar células mais simples. Sem dúvida menos campos nas células reduz o gasto de memória, mas não acaba com o problema de a política de reciclagem de células não ser utilizada a todo momento.
-
+Com isso, o alvo do problema parece ter sido encontrado e está em adicionar entradas após o itemSource já ter sido definido e o não reuso de células. A criação de células novas com todas as estruturas de evento e binding por célula para manter a lista responsiva gastam muita memória. Foram tentadas outras versões do Xamarin.Forms, com o mesmo resultado. Também foi tentado criar células mais simples e constatado que menos campos nas células reduz o gasto de memória, mas não acaba com o problema de a política de reciclagem de células não ser utilizada a todo momento.
 
 2- CPU performance
+
+Como mostrado anteriormente, as células não sendo reusadas na ListView, as alocações delas e das estruturas necessárias para manter a lista reponsiva também se tornam um gargalo para a CPU. Enquanto as ordens são criadas a performance é prejudicada, enquanto existem updates apenas, mesmo em uma maior frequência, a responsividade continua boa.
+
+Examplo de comportamento do processador em UWP enquanto 10000 ordens estão sendo criadas:
+![image](https://user-images.githubusercontent.com/5822726/118736638-6f8ae980-b819-11eb-8197-7bae1c08c01b.png)
+
+Exemplo quando as 10000 ordens já foram criadas:
+
+## Conclusão ##
+Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de uso de células funcionou apenas quando os elementos da coleção foram adicionados antes de a coleção ser setada como ItemSource da ListView e como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. A solução seria criar um componente sem usar o ListView que tivesse uma política de reuso de células, adotar uma solução comercial ou investigar mais a fundo o próprio Xamarin e o componente de ListView.
 
 ## Notas ## 
 - Máquina usada para testes:
