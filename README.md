@@ -26,8 +26,8 @@ Ordens visíveis na tela sem precisar de scroll: 32
 
 |   | 0 orders| 1000 orders | 10000 orders |
 |---| --------|-------------|--------------|
-|UWP| 34 MB   | 290 MB      |     1.3GB    |
-|WPF| 109 MB  | 870 MB      |     > 3GB    |
+|UWP|   34 MB |      290 MB |      ~ 1.3GB |
+|WPF|  109 MB |      870 MB |      >   3GB |
 
 
 Memory snapshots UWP
@@ -79,18 +79,20 @@ Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizan
 
 ## Notas ## 
 - Máquina usada para testes:
-Intel(R) Core(TM) i7-9750H @2.60Hz
-RAM 16GB
+Intel(R) Core(TM) i7-9750H @2.60Hz | RAM 16GB
 
-- Versões utilizadas:
-Visual Studio 2019
-WPF Core 3.1 e WPF Framework 4.72
-Xamarin.Forms mais recente
+- Versões utilizadas  
+Visual Studio 2019  | WPF Core 3.1 e WPF Framework 4.72 | Xamarin.Forms mais recente
 
-- Compilação
+- Compilação  
 Foi constatado que com essas verões utilizadas a compilação dos projetos em Release é muito mais lenta do que em Debug
 
 - Erros
 Apenas no UWP aparece esse erro a ser investigado, apesar de funcionar ok.
 ![image](https://user-images.githubusercontent.com/5822726/118736305-a14f8080-b818-11eb-8507-571c4712dd82.png)
 
+Referências:
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding  
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance  
+https://stackoverflow.com/questions/62131069/how-can-i-clear-strange-spacing-of-listviewitem-in-xamarin-wpf  
+https://help.syncfusion.com/xamarin/datagrid/getting-started  
