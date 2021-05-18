@@ -17,22 +17,38 @@ The created mock uses a timer and every 50ms adds an order in the observable col
 
 ## 3- Performance and memory consumption ##
 The first impressions were that the UWP application was performing better than the WPF one while rows were being added and/or updated. When dragging or scrolling the screen the UWP app was working smoothly and the WPF app freezing a bit. Also examining the memory profiler it was possible to notice a big increase of memory for both apps while the rows were being added.
-But, it was also noticed that with a limit for the order creation, after all orders were created, the WPF app performance would be better again what was an indication of the order creation being a bottleneck and not the updates.
+But, it was also noticed that with a limit for the number of crated order, after all orders were created, the WPF app performance would be better again what was an indication of the order creation being a bottleneck and not the updates.
 
-There is one thread for the mock timer -- adding and/or updating orders -- and the UI thread. Since updating didn't seem to overload de UI thread, the BeginInvoke calls to execute the add or update operations in the UI thread didn't look to be a problem, as sometimes it can be. Below are the results and analysis.
+There is one thread for the mock timer -- adding and/or updating orders -- and the UI thread. Since updating didn't seem to overload de UI thread, the multiple BeginInvoke calls to execute the add or update operations in the UI thread didn't seem to be a problem. Below are the results and analysis.
 
-Memory consumption 
+1- Memory consumption
+Visible order rows without scroll: 32  
 
-Orders: 0 (application start)  
-Updates: infinite  
-Space for order rows : 32  
+|   | 0 orders| 1000 orders | 10000 orders |
+|---| --------|-------------|--------------|
+|UWP| 34 MB   | 290 MB      |              |
+|WPF| 109 MB  | 870 MB      |     > 3GB    |
 
-- UWP: 34 MB  
-- WPF:  
+Visible order rows without scroll: 10  
 
-Orders: 1000  
-Updates: infinite  
-Space for order rows : 32  
-- UWP: 290 MB  
-- WPF: 
+|   | 0 orders| 1000 orders | 10000 orders |
+|---| --------|-------------|--------------|
+|UWP| 34 MB   | 290 MB      |              |
+|WPF| 109 MB  | 870 MB      |              |
 
+With the tables above it could be seen that even with the ListView having a caching strategy of recycling rows, the amount of rows visible at the same time is a major factor in memory consumption.
+
+Reduce the amount of row fieds to one
+
+|   | 0 orders| 1000 orders | 10000 orders |
+|---| --------|-------------|--------------|
+|UWP| 34 MB   | 290 MB      |              |
+|WPF| 109 MB  | 870 MB      |              |
+
+With this other test, when the number of order fields were intentionally reduced just to ID for testing purposes, it could also be seen that the number of fields in a row also play a major role in memory consumption.
+
+Below a snapshot of the memory consumption while orders are being added
+
+All that indicates that the structures built for keeping the listview auto updatable by just adding elements to the ObservableCollection represent the largest memory expenditure. And with more visible rows and more ViewCells created at the same time, also with more fields to be binded to the orderviewmodel, greater becomes the memory consumption. With the listview and approximately 14 string fields, for 10000 orders and 32 rows, it is already impracticable to use this solution.
+
+2- CPU performance
