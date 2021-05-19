@@ -80,10 +80,10 @@ Os picos no gráfico de processamento mostram os momentos de aumento de carga de
 
 **WPF**  
 Comportamento no Xamarin enquanto as ordens estão sendo criadas:  
-![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)
+![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)  
 
-E quando todas já foram criadas, com picos de menor duração: 
-![image](https://user-images.githubusercontent.com/5822726/118739714-8123bf80-b820-11eb-977e-d766a90bf08c.png)
+E quando todas já foram criadas, com picos de menor duração:  
+![image](https://user-images.githubusercontent.com/5822726/118739714-8123bf80-b820-11eb-977e-d766a90bf08c.png)  
 
 **Picos de CPU isolados no WPF**  
 Com o profiler de CPU do Visual Studio foi possível isolar exatamente um desses picos:
@@ -106,7 +106,7 @@ Não parece ser o caso que a ideia da ListView seja parar de reusar células ap�
 Intel(R) Core(TM) i7-9750H @2.60Hz | RAM 16GB
 
 - Versões utilizadas  
-Visual Studio 2019  | WPF Core 3.1 e WPF Framework 4.72 | Xamarin.Forms mais recente
+Visual Studio 2019  | WPF Core 3.1 e WPF Framework 4.72 | Xamarin.Forms 5.0.0.2012
 
 - Compilação  
 Foi constatado que, com as versões utilizadas do Xamarin, a compilação dos projetos em Release ficou muito mais lenta do que em Debug.
