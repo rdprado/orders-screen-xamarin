@@ -31,10 +31,8 @@ Ordens visíveis na tela sem precisar de scroll: 32
 
 
 Memory snapshots UWP
+![CaptureUWP-4500ordens](https://user-images.githubusercontent.com/5822726/118740162-8af9f280-b821-11eb-8ff7-cb0533c76f38.png)
 
-Aproximadamente 4200 ordens criadas:
-![CaptureUWP-4500ordens](https://user-images.githubusercontent.com/5822726/118710154-4c9a0e80-b7f4-11eb-97aa-15938d303246.PNG)
-:
 
 Aproximadamente 8000 ordens criadas:
 ![CaptureUWP-8000bordens](https://user-images.githubusercontent.com/5822726/118710222-62a7cf00-b7f4-11eb-8a6d-40cf4be90a01.PNG)
