@@ -49,7 +49,6 @@ while (i++ < 10000)
 {
     orders.Add(new OrderViewModel());
 }
-
 listView.ItemsSource = orders;
 ```
 
@@ -92,8 +91,11 @@ Com o profiler de CPU do Visual Studio foi possível isolar exatamente um desses
 
 As figuras abaixo mostram o que mais consome o CPU:
 ![image](https://user-images.githubusercontent.com/5822726/118870078-8b939700-b8bc-11eb-926c-ecea8a2163dd.png)  
+
 e  
+
 ![Capturecpu3](https://user-images.githubusercontent.com/5822726/118870113-90f0e180-b8bc-11eb-875e-7be2adf18d7d.PNG)  
+
 Praticamente metade do consumo fica na procura da ordem a ser atualizada na coleção de ordens. A busca se dá pelo ID da ordem e tem uma complexidade O(n). A outra metade fica com a thread da UI.
 
 Dessa forma, caso o problema de reuso de células fosse resolvido, o update poderia ser atacado, mas a princípio mais updates alargariam o pico e não necessariamente comprometeriam o desempenho.
