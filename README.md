@@ -75,7 +75,7 @@ Examplo de comportamento do processador em UWP enquanto 10000 ordens estão send
 Exemplo quando as 10000 ordens já foram criadas:  
 ![image](https://user-images.githubusercontent.com/5822726/118737773-f04ae500-b81b-11eb-946a-7226a83473d8.png)
 
-Os picos no gráfico de processamento mostram os momentos de aumento carga de updates. Ocorrem a cada 10 segundos e duram até completar as chamadas de updates de 30% das ordens existentes.
+Os picos no gráfico de processamento mostram os momentos de aumento carga de updates. Mais claros quando não há mais criação de ordens. Ocorrem a cada 10 segundos e duram até completar as chamadas de updates de 30% das ordens existentes.
 
 ## Conclusão ##
 Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de uso de células funcionou apenas quando os elementos da coleção foram adicionados antes de a coleção ser setada como ItemSource da ListView e como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. A solução seria criar um componente sem usar o ListView que tivesse uma política de reuso de células, adotar uma solução comercial ou investigar mais a fundo o próprio Xamarin e o componente de ListView.
