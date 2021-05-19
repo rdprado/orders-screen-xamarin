@@ -34,7 +34,8 @@ Nas aplicações existe uma thread de UI e uma thread do timer que fica no mock,
 |WPF|  109 MB |      870 MB |      >   3GB |
 
 
-Memory snapshots UWP
+Memory snapshots UWP  
+    
 Aproximadamente 4000 ordens criadas:  
 ![CaptureUWP-4500ordens](https://user-images.githubusercontent.com/5822726/118740162-8af9f280-b821-11eb-8ff7-cb0533c76f38.png)
 
