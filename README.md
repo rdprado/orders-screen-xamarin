@@ -70,7 +70,7 @@ Com isso, o alvo do problema parece ter sido encontrado e está em adicionar ent
 
 Como mostrado anteriormente, as células não foram reusadas na ListView e as alocações delas e das estruturas necessárias para manter a lista reponsiva também se tornaram um gargalo para a CPU. Enquanto as ordens são criadas a performance é prejudicada. Enquanto existem updates apenas, mesmo em uma maior frequência, a responsividade continua boa, mesmo no WPF, com 10000 ordens e updates.
 
-**UWP**
+**UWP**  
 Exemplo de comportamento do processador em UWP enquanto 10000 ordens estão sendo criadas:
 ![image](https://user-images.githubusercontent.com/5822726/118736638-6f8ae980-b819-11eb-8197-7bae1c08c01b.png)
 
@@ -79,14 +79,14 @@ Exemplo quando as 10000 ordens já foram criadas:
 
 Os picos no gráfico de processamento mostram os momentos de aumento de carga de updates. Mais claros quando já terminou a criação de ordens. Ocorrem a cada 10 segundos e duram até completar as chamadas de update de 30% das ordens existentes.
 
-**WPF**
+**WPF**  
 Comportamento semelhante no Xamarin enquanto as ordens estão sendo criadas:  
 ![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)
 
 Com picos de menor duração, indicando uma performance possivelmente melhor nesse caso de updates. 
 ![image](https://user-images.githubusercontent.com/5822726/118739714-8123bf80-b820-11eb-977e-d766a90bf08c.png)
 
-**Picos isolados no WPF**
+**Picos de CPU isolados no WPF**  
 Com o profiler de CPU do Visual Studio foi possível isolar exatamente um desses picos:
 ![image](https://user-images.githubusercontent.com/5822726/118870336-d0b7c900-b8bc-11eb-8454-970c191cd108.png)
 
