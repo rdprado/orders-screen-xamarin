@@ -35,9 +35,10 @@ Nas aplicações existe uma thread de UI e uma thread do timer que fica no mock,
 
 
 Memory snapshots UWP
+Aproximadamente 4000 ordens criadas:  
 ![CaptureUWP-4500ordens](https://user-images.githubusercontent.com/5822726/118740162-8af9f280-b821-11eb-8ff7-cb0533c76f38.png)
 
-Aproximadamente 8000 ordens criadas:
+Aproximadamente 8000 ordens criadas:  
 ![CaptureUWP-8000bordens](https://user-images.githubusercontent.com/5822726/118710222-62a7cf00-b7f4-11eb-8a6d-40cf4be90a01.PNG)
 
 Os snapshots mostram que mesmo tendo sido ativada a opcão de caching strategy para reciclar células, aparentemente todas as células foram criadas, uma para cada entrada da coleção. As outras estruturas gastando memória são relativas aos eventos e bindings das células. Dessa forma, com 10000 ordens e 32 ordens visíveis, a solução com a ListView já  ficaria impraticável, tendo criado 10000 ViewCells. O mesmo ocorre em WPF.
