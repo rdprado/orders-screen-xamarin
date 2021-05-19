@@ -3,10 +3,8 @@ using OrdersScreen.ViewModels;
 using OrdersScreen.Views;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 using System.Timers;
+using Xamarin.Forms;
 
 namespace OrdersScreen.Mocks
 {
@@ -49,7 +47,7 @@ namespace OrdersScreen.Mocks
 
                 if (addsCount < maxAdds) // limit to add to avoid full memory consumption
                 {
-                    addsCount = SimulateAddAndOrUpdateOrder(ordersVM, addsCount);
+                    SimulateAddAndOrUpdateOrder(ordersVM, ref addsCount);
                 }
                 else
                 {
@@ -73,7 +71,7 @@ namespace OrdersScreen.Mocks
             }
         }
 
-        private int SimulateAddAndOrUpdateOrder(OrdersViewModel ordersVM, int addsCount)
+        private int SimulateAddAndOrUpdateOrder(OrdersViewModel ordersVM, ref int addsCount)
         {
             // Add and/or update
 
@@ -87,7 +85,7 @@ namespace OrdersScreen.Mocks
                 if (chanceToCreate <= 5)
                 {
                     // and update
-                    //SimulateUpdateOrder(ordersVM);
+                    SimulateUpdateOrder(ordersVM);
                 }
             }
             else
