@@ -10,7 +10,17 @@ namespace OrdersScreen.Mocks
 {
     class OrdersViewFeederMock : OrdersViewFeeder
     {
+        #region settings
+
         bool useIncreasedLoad = true;
+        private const int maxAdds = 1000;
+        private const float increaseLoadFactor = 0.3f;
+        private TimeSpan orderInterval = TimeSpan.FromMilliseconds(50);
+        private TimeSpan increasedLoadInterval = TimeSpan.FromSeconds(10);
+
+        #endregion
+
+        #region fakedata
 
         public List<string> fakeSymbols 
             = new List<string> { "PETR54", "ABSD11", "HGTD40", "UBDF4", "UTTO2", "OMGR4", "HTT13" };
@@ -18,34 +28,33 @@ namespace OrdersScreen.Mocks
         public List<string> fakeOrdTypes
             = new List<string> { "1", "2", "3", "C"};
 
-        private const int maxAdds = 1000;
-        private TimeSpan orderInterval = TimeSpan.FromMilliseconds(50);
-        private TimeSpan increasedLoadInterval = TimeSpan.FromSeconds(10);
-
+        #endregion
+        
         private readonly Random random = new Random();
-        int currentOrderId = 0;
-
-        private static System.Timers.Timer timer;
+        private int currentOrderId = 0;
+        private static Timer timer;
 
         public void Start(OrdersViewModel ordersVM)
         {
             int addsCount = 0;
-            double increaseLoadTimeBankMilliSecs = 0;
+            double increaseLoadTimeBank = 0;
 
             timer = new System.Timers.Timer(orderInterval.TotalMilliseconds);
             timer.Elapsed += (object source, ElapsedEventArgs args) =>
             {
                 if (useIncreasedLoad)
                 {
-                    increaseLoadTimeBankMilliSecs += orderInterval.TotalMilliseconds;
-                    if (increaseLoadTimeBankMilliSecs > increasedLoadInterval.TotalMilliseconds)
+                    increaseLoadTimeBank += orderInterval.TotalMilliseconds;
+                    if (increaseLoadTimeBank > increasedLoadInterval.TotalMilliseconds)
                     {
-                        increaseLoadTimeBankMilliSecs = 0;
+                        // reset so the increased load only happens again after n milliseconds
+                        increaseLoadTimeBank = 0; 
+
                         TryToIncreaseLoad(ordersVM);
                     }
                 }
 
-                if (addsCount < maxAdds) // limit to add to avoid full memory consumption
+                if (addsCount < maxAdds) // limit adds to avoid memory consumption with ListView cells
                 {
                     SimulateAddAndOrUpdateOrder(ordersVM, ref addsCount);
                 }
@@ -63,7 +72,7 @@ namespace OrdersScreen.Mocks
             var ordersCount = int.Parse(ordersVM.OrdersCount);
             if (ordersCount > 100)
             {
-                var numUpdates = ordersCount * 0.3;
+                var numUpdates = ordersCount * increaseLoadFactor;
                 for (int i = 0; i < numUpdates; i++)
                 {
                     SimulateUpdateOrder(ordersVM);
@@ -75,14 +84,14 @@ namespace OrdersScreen.Mocks
         {
             // Add and/or update
 
-            var chanceToCreate = random.Next(1, 10);
-            if (chanceToCreate % 2 == 0)
+            var chanceToAdd = random.Next(1, 10);
+            if (chanceToAdd % 2 == 0)
             {
                 // add
                 SimulateAddOrder(ordersVM);
                 addsCount++;
 
-                if (chanceToCreate <= 5)
+                if (chanceToAdd <= 5)
                 {
                     // and update
                     SimulateUpdateOrder(ordersVM);
@@ -125,7 +134,7 @@ namespace OrdersScreen.Mocks
             var vm = new OrderViewModel
             {
                 Id = order.Id,
-                CreationDate = order.CreationDate.ToString(),
+                CreationDate = order.CreationDate.ToString("dd/MM/yyyy HH:mm:ss"),
                 Account = order.Account,
                 Symbol = order.Symbol,
                 OrdType = order.OrdType,
