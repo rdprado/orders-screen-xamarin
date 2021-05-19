@@ -86,12 +86,12 @@ Comportamento semelhante no Xamarin
 Com picos de menor duração, indicando uma performance possivelmente melhor nesse caso de updates.
 
 ## Conclusão ##
-Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de uso de células funcionou apenas quando os elementos da coleção foram adicionados antes de a coleção ser setada como ItemSource da ListView. Porém, como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. 
-Não parece ser o caso que a ListView não possa receber incrementos, ela deveria continuar reusando células. Seria, portanto, importante continuar investigando como fazer isso acontecer, mesmo que fosse preciso alterar o código do Xamarin, quando receber o evento CollectionChanged do ObservableC.llection. Com a estratégia de reuso funcionando, seria viável usar a ListView para um número considerável de ordens.
+Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de reuso de células funcionou apenas quando os elementos da ObservableCollection foram adicionados antes de a coleção ser setada como ItemSource da ListView. Porém, como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. 
+Não parece ser o caso que a ideia da ListView seria parar de reusar células após adições. Seria, portanto, importante continuar investigando como fazer isso acontecer, mesmo que fosse preciso alterar o código do Xamarin quando recebe o evento CollectionChanged. Com a estratégia de reuso funcionando, seria viável usar a ListView para um número considerável de ordens.
 
-Com um número muito grande de ordens, como 100.000 ou mais, e uma carga de updates elevada de 30% de tempos em tempos, caso os updates começassem a trazer um problema de sobrecarga an thread da UI, uma solução seria acumular as chamadas de update e reduzir o número de chamadas de BeginInvoke.
+Com um número muito grande de ordens, como 100.000 ou mais e uma carga de updates elevada de 30% de tempos em tempos, caso os updates começassem a ser um problema de sobrecarga na thread da UI, uma tentativa seria acumular as chamadas de update e reduzir o número de chamadas de BeginInvoke.
 
-Uma outra solução seria criar um componente sem usar o ListView, que usasse, por exemplo, um Grid mas que tivesse uma política de reuso de células.
+Uma outra solução seria criar um componente sem usar o ListView, que usasse, por exemplo, um Grid mas daí seria preciso implementar uma estratégia de reuso de células e de responsividade com o MVVM.
 
 ## Notas ## 
 - Máquina usada para testes:
@@ -101,10 +101,10 @@ Intel(R) Core(TM) i7-9750H @2.60Hz | RAM 16GB
 Visual Studio 2019  | WPF Core 3.1 e WPF Framework 4.72 | Xamarin.Forms mais recente
 
 - Compilação  
-Foi constatado que com essas verões utilizadas a compilação dos projetos em Release é muito mais lenta do que em Debug
+Foi constatado que, com as versões utilizadas do Xamarin, a compilação dos projetos em Release ficou muito mais lenta do que em Debug.
 
 - Erros
-Apenas no UWP aparece esse erro a ser investigado, apesar de funcionar ok.
+Apenas no UWP aparece o erro abaixo, a ser investigado, apesar de aplicação rodar e fazer os binds.
 ![image](https://user-images.githubusercontent.com/5822726/118736305-a14f8080-b818-11eb-8507-571c4712dd82.png)
 
 Referências  
