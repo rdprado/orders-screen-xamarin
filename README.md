@@ -79,10 +79,10 @@ Exemplo quando as 10000 ordens já foram criadas:
 Os picos no gráfico de processamento mostram os momentos de aumento de carga de updates. Mais claros quando já terminou a criação de ordens. Ocorrem a cada 10 segundos e duram até completar as chamadas de update de 30% das ordens existentes.
 
 **WPF**  
-Comportamento semelhante no Xamarin enquanto as ordens estão sendo criadas:  
+Comportamento no Xamarin enquanto as ordens estão sendo criadas:  
 ![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)
 
-Com picos de menor duração, indicando uma performance possivelmente melhor nesse caso de updates. 
+E quando todas já foram criadas, com picos de menor duração: 
 ![image](https://user-images.githubusercontent.com/5822726/118739714-8123bf80-b820-11eb-977e-d766a90bf08c.png)
 
 **Picos de CPU isolados no WPF**  
