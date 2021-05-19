@@ -22,8 +22,6 @@ Nas aplicações existe uma thread de UI e uma thread do timer que fica no mock,
 
 1- Consumo de memória
 
-Ordens visíveis na tela sem precisar de scroll: 32  
-
 |   | 0 orders| 1000 orders | 10000 orders |
 |---| --------|-------------|--------------|
 |UWP|   34 MB |      290 MB |      ~ 1.3GB |
