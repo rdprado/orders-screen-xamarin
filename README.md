@@ -77,6 +77,10 @@ Exemplo quando as 10000 ordens já foram criadas:
 
 Os picos no gráfico de processamento mostram os momentos de aumento carga de updates. Mais claros quando não há mais criação de ordens. Ocorrem a cada 10 segundos e duram até completar as chamadas de updates de 30% das ordens existentes.
 
+Comportamento semelhante no Xamarin
+![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)
+
+
 ## Conclusão ##
 Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de uso de células funcionou apenas quando os elementos da coleção foram adicionados antes de a coleção ser setada como ItemSource da ListView e como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. A solução seria criar um componente sem usar o ListView que tivesse uma política de reuso de células, adotar uma solução comercial ou investigar mais a fundo o próprio Xamarin e o componente de ListView.
 
