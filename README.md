@@ -85,6 +85,9 @@ Comportamento semelhante no Xamarin
 
 Com picos de menor duração, indicando uma performance possivelmente melhor nesse caso de updates.
 
+![image](https://user-images.githubusercontent.com/5822726/118857366-554f1b00-b8ae-11eb-9eaf-4a3104e46fc1.png)
+
+
 ## Conclusão ##
 Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de reuso de células funcionou apenas quando os elementos da ObservableCollection foram adicionados antes de a coleção ser setada como ItemSource da ListView. Porém, como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. 
 Não parece ser o caso que a ideia da ListView seria parar de reusar células após adições. Seria, portanto, importante continuar investigando como fazer isso acontecer, mesmo que fosse preciso alterar o código do Xamarin quando recebe o evento CollectionChanged. Com a estratégia de reuso funcionando, seria viável usar a ListView para um número considerável de ordens.
