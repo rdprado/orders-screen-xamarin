@@ -11,11 +11,11 @@ O visual ficou como esperado. Um ajuste precisou ser feito apenas para WPF, para
 ## 2- Mock para carregar as entradas na view de ordens ##
 Criada interface OrdersScreenFeeder e um mock que a implementa para alimentar a UI. Dessa forma, foi possível injetar a implementação do mock na view de ordens sem que ela conhecesse detalhes de implementação. Também seria possível criar outros mocks de teste ou implementações reais como de serviços para obter ou receber dados. A implementação poderia estar em projeto separado.
 
-A pattern MVVM foi utilizada como recomendado em https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding com o itemSource da ListView usando um binding para uma ObservableCollection. 
+A pattern MVVM foi utilizada como recomendado em https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding com o itemSource da ListView usando um binding para uma ObservableCollection da seguinte forma: 
 
-View  
-ViewModel -> ObservableCollection OrdersViewModel 
-ViewModel -> OrderViewModel
+View -> ListView  
+ViewModel -> OrdersViewModel (ObservableCollection)  
+ViewModel -> OrderViewModel  
 
 A coleção, poderia ter referencias direto para o Model mas como decisão de projeto foi escolhido separar a camada de modelo da view e, portanto, existe um Order model e um ViewModel.
 
