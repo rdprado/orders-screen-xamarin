@@ -42,7 +42,7 @@ Aproximadamente 4000 ordens criadas:
 Aproximadamente 8000 ordens criadas:  
 ![CaptureUWP-8000bordens](https://user-images.githubusercontent.com/5822726/118710222-62a7cf00-b7f4-11eb-8a6d-40cf4be90a01.PNG)
 
-Os snapshots mostram que mesmo tendo sido ativada a opcão de caching strategy para reciclar células, aparentemente todas as células foram criadas, uma para cada entrada da coleção. As outras estruturas gastando memória são relativas aos eventos e bindings das células. Dessa forma, com 10000 ordens e 32 ordens visíveis, a solução com a ListView já  ficaria impraticável, tendo criado 10000 ViewCells. O mesmo ocorre em WPF.
+Os snapshots mostram que mesmo tendo sido ativada a opcão de caching strategy para reciclar células, aparentemente todas as células foram criadas, uma para cada entrada da coleção. As outras estruturas gastando mais memória são relativas aos eventos e bindings das células criadas. Dessa forma, com 10000 ordens e 32 ordens visíveis, a solução com a ListView já  ficaria impraticável, tendo criado 10000 ViewCells. O mesmo ocorre em WPF.
 
 Para confirmar o resultado acima e que a ListView precisa conseguir reciclar as células, o teste a seguir foi feito criando-se 10000 ordens e somente depois setando o itemsource do listView:
 
