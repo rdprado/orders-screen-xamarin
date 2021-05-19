@@ -80,6 +80,9 @@ Os picos no gráfico de processamento mostram os momentos de aumento carga de up
 Comportamento semelhante no Xamarin  
 ![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)
 
+![image](https://user-images.githubusercontent.com/5822726/118739714-8123bf80-b820-11eb-977e-d766a90bf08c.png)
+
+Com picos de menor duração indicando uma performance possivelmente melhor nesse caso de updates.
 
 ## Conclusão ##
 Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de uso de células funcionou apenas quando os elementos da coleção foram adicionados antes de a coleção ser setada como ItemSource da ListView e como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. A solução seria criar um componente sem usar o ListView que tivesse uma política de reuso de células, adotar uma solução comercial ou investigar mais a fundo o próprio Xamarin e o componente de ListView.
