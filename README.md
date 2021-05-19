@@ -77,7 +77,7 @@ Exemplo quando as 10000 ordens já foram criadas:
 
 Os picos no gráfico de processamento mostram os momentos de aumento carga de updates. Mais claros quando não há mais criação de ordens. Ocorrem a cada 10 segundos e duram até completar as chamadas de updates de 30% das ordens existentes.
 
-Comportamento semelhante no Xamarin
+Comportamento semelhante no Xamarin  
 ![image](https://user-images.githubusercontent.com/5822726/118739498-02c71d80-b820-11eb-99f9-f9c579254e9b.png)
 
 
