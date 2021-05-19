@@ -83,10 +83,15 @@ Comportamento semelhante no Xamarin
 
 ![image](https://user-images.githubusercontent.com/5822726/118739714-8123bf80-b820-11eb-977e-d766a90bf08c.png)
 
-Com picos de menor duração, indicando uma performance possivelmente melhor nesse caso de updates.
+Com picos de menor duração, indicando uma performance possivelmente melhor nesse caso de updates. Com o profiler de CPU do Visual Studio foi possível isolar exatamente um desses picos:
+![image](https://user-images.githubusercontent.com/5822726/118870336-d0b7c900-b8bc-11eb-8454-970c191cd108.png)
 
-![image](https://user-images.githubusercontent.com/5822726/118857366-554f1b00-b8ae-11eb-9eaf-4a3104e46fc1.png)
+e os métodos abaixo mostram o principal consumo de CPU
+![image](https://user-images.githubusercontent.com/5822726/118870078-8b939700-b8bc-11eb-926c-ecea8a2163dd.png)
+Praticamente metade do consumo fica na procura da ordem a ser atualizada na coleção de ordens. A busca se dá pelo ID da ordem e tem uma complexidade O(n).
 
+![Capturecpu3](https://user-images.githubusercontent.com/5822726/118870113-90f0e180-b8bc-11eb-875e-7be2adf18d7d.PNG)
+ A outra metade fica com a thread da UI.
 
 ## Conclusão ##
 Como o Xamarin não possui um controle nativo de DataGrid foi criado um utilizando-se o ListView. A política de reuso de células funcionou apenas quando os elementos da ObservableCollection foram adicionados antes de a coleção ser setada como ItemSource da ListView. Porém, como é preciso adicionar elementos posteriormente, o gasto de memória foi grande. O processamento também fica comprometido enquanto se adiciona elementos. Alguns experimentos foram feitos para tentar que o reuso de células fosse feito, mas sem sucesso. 
