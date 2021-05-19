@@ -94,7 +94,7 @@ Foi constatado que com essas verões utilizadas a compilação dos projetos em R
 Apenas no UWP aparece esse erro a ser investigado, apesar de funcionar ok.
 ![image](https://user-images.githubusercontent.com/5822726/118736305-a14f8080-b818-11eb-8507-571c4712dd82.png)
 
-Referências:
+Referências  
 https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding  
 https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance  
 https://stackoverflow.com/questions/62131069/how-can-i-clear-strange-spacing-of-listviewitem-in-xamarin-wpf  
