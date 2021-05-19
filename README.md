@@ -1,24 +1,24 @@
 # orders-screen-xamarin
-Projeto Xamarin para testar a criação de uma aplicação cross-platform em WPF e UWP usando um datagrid view contendo dados de exemplo de ordens do mercado de ações. Entradas podem ser adicionadas ou atualizadas na UI.
+Projeto Xamarin para teste de uma aplicação cross-platform em WPF e UWP usando um datagrid view com dados de exemplo similares a ordens do mercado de ações. Entradas podem ser adicionadas ou atualizadas na UI.
 
 ## 1- Layout ##
-A primeira fase foi construir uma tela com ordens em uma view com estilo de datagrid. Diferente do WPF ou Windows Forms o Xamarin não inclui um controle de datagrid nativo e, então, as opções seriam usar uma solução não nativa existente contra criar uma nova. Foram encontrados alguns pacotes com datagrid views, como da SyncFusion que diz ter uma solução de alta performance, mas sua licença é comercial. Foi encontrado também um pacote akgulebubekir/Xamarin.Forms.DataGrid não suportado por WPF. Então, foi decidido criar uma solução simples utilizando o controle ListView.
+Diferente do WPF ou Windows Forms o Xamarin não inclui um controle de datagrid nativo e as opções seriam usar uma solução não nativa existente ou criar uma nova. Foram encontrados alguns pacotes com datagrid views, como um da SyncFusion que diz ter uma solução de alta performance, mas sua licença é comercial. Foi encontrado também o pacote akgulebubekir/Xamarin.Forms.DataGrid, não suportado por WPF. Com isso, foi decidido criar uma solução simples utilizando o controle ListView.
 
 ![main view](https://user-images.githubusercontent.com/5822726/118692225-31bd9f00-b7e0-11eb-9681-71e4a193a4b9.PNG)
 
-No fim, o visual ficou como esperado com a ListView. Um ajuste precisou ser feito para no App.xaml apenas para WPF, para remover uma margem indesejada na esquerda da ListView. O tamanho horizontal foi fixado pois um bug foi identificado no UWP ao redimensionar a janela enquanto se estava adicionando ordens. Poderia ter sido corrigido apenas para o UWP. Um desafio de usar a ListView foi como manter a coluna do cabeçalho do mesmo tamanho das colunas dos itens da ListView. Para simplificar a largura das colunas foi definida como valores fixos.
+No fim, o visual ficou como esperado com a ListView. Um ajuste precisou ser feito no App.xaml, apenas para WPF, para remover uma margem indesejada na esquerda da ListView. O tamanho horizontal foi fixado devido a um identificado no UWP ao redimensionar a janela enquanto se estava adicionando ordens. Poderia ter sido corrigido apenas para o UWP. Um desafio de usar a ListView foi o de como manter a coluna do cabeçalho do mesmo tamanho das colunas dos itens da ListView. Para simplificar, a largura das colunas foi definida como valores fixos.
 
 ## 2- Mock para carregar as entradas na view de ordens ##
-Para essa fase foi criada uma interface chamada OrdersScreenFeeder e um mock que a implementa, para alimentar a view. Dessa forma foi possível injetar a implementação do mock através do App.xaml na view de ordens, bastando que o código da view chamasse um método Start() sem conehcer os detalhes de implementação. Assim, também seria possível criar outros mocks de teste ou ter implementações reais de serviços para obter ou receber dados. Com isso também a implementação do Feeder poderia estar em um projeto separado.
+Foi criada uma interface, OrdersScreenFeeder, e um mock que a implementa para alimentar a view. Dessa forma, foi possível injetar a implementação do mock na view de ordens bastando que o código da view chamasse um método Start() sem conhecer detalhes de implementação. Também seria possível criar outros mocks de teste ou ter implementações reais de serviços para obter ou receber dados. Com isso, também a implementação do Feeder poderia estar em um projeto separado.
 
-A pattern MVVM foi utilizada como recomendado em https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding com o itemSource da ListView usando binding para uma ObservableCollection para que a ListView fosse atualizada automaticamente quando células fossem inseridas. O ObservableCollection OrdersViewModel possui OrderViewModels neste exemplo. A lsita poderia ter referencias para Order models diretamentem mas como decisão de projeto foi escolhido separar a camada de modelo da de view.
+A pattern MVVM foi utilizada como recomendado em https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding com o itemSource da ListView usando um binding para uma ObservableCollection. Assim, a ListView seria atualizada automaticamente quando células fossem inseridas. O ObservableCollection possui objetos OrderViewModel neste exemplo. A lista, também um viewmodel, poderia ter referencias para Order models diretamente mas como decisão de projeto foi escolhido separar a camada de modelo da view.
 
-O mock usa um timer e a cada 50ms adiciona uma ordem na ObservableCollection ou faz um update ou ambos. E a cada 10 segundos simula um aumento de carga de updates em cima de 30% das ordens existentes.
+O mock usa um timer e a cada 50ms adiciona uma ordem na ObservableCollection ou faz um update, ou ambos. A cada 10 segundos simula um aumento de carga de updates em 30% das ordens existentes.
 
 ## 3- Memória e performance ##
-As primeiras impressões foram que a aplicação UWP estava performando melhor que a em WPF enquanto linhas estavam sendo adicionadas no DataGrid. Quando se arrastava as janelas ou se realizava um scroll, a janela em UWP se movia suavemente enquanto em WPF travando um pouco. Também, examinando-se o profiler de memória do VisualStudio, foi possível notar um aumento de memória muito grande enquanto as linhas eram adicionadas. Mas, também foi notado que com um limite para o número de ordens adicionadas, após a criação de todas as ordens, a performance da aplciação em WPF voltava a ficar boa indicando que a criação de ordens seria o gargalo e não os updates. Mesmo com a carga maior de updates de 10 em 10 segundos, a aplicação funcionava bem.
+Uma das primeiras impressões foi que a aplicação UWP estava performando melhor que a WPF enquanto linhas estavam sendo adicionadas no DataGrid. Quando se arrastava as janelas ou se realizava um scroll a janela em UWP se movia suavemente enquanto a janela em WPF travava um pouco. Também, examinando-se o profiler de memória do VisualStudio, foi possível notar um aumento de memória muito grande enquanto as linhas eram adicionadas. Também foi notado que com um limite para o número de ordens adicionadas, após a criação de todas as ordens, a performance da aplicação em WPF voltava a ficar boa indicando que a criação de ordens seria o gargalo e não os updates. Mesmo com a carga maior de updates de 10 em 10 segundos, a aplicação funcionava bem.
 
-Nas aplicações existe uma thread de UI e uma thread do timer que fica no mock, gerando e atualizando ordens. Como os updates não pareceram sobrecarregar a thread da UI, as múltiplas chamadas BeginInvoke para executar as operações de add e update na UI não pareciam também sr um problema. Abaixo a análise que foi feita a partir disso:
+Nas aplicações existe uma thread de UI e uma thread do timer que fica no mock, gerando e atualizando ordens. Como os updates não pareceram sobrecarregar a thread da UI, as múltiplas chamadas de BeginInvoke para executar as operações de add e update na thread da UI não pareciam também ser um problema. Abaixo a análise que foi feita a partir disso:
 
 1- Consumo de memória
 
@@ -39,7 +39,7 @@ Aproximadamente 4200 ordens criadas:
 Aproximadamente 8000 ordens criadas:
 ![CaptureUWP-8000bordens](https://user-images.githubusercontent.com/5822726/118710222-62a7cf00-b7f4-11eb-8a6d-40cf4be90a01.PNG)
 
-O resultado mostra que mesmo tendo sido ativada a opcão de caching strategy para reciclar células, aparentemente todas as células foram criadas, uma para cada entrada da coleção. Dessa forma, com 10000 ordens e 32 ordens visíveis, a solução com a ListView já começaria a ficar impraticável.
+O resultado mostra que mesmo tendo sido ativada a opcão de caching strategy para reciclar células, aparentemente todas as células foram criadas, uma para cada entrada da coleção. Dessa forma, com 10000 ordens e 32 ordens visíveis, a solução com a ListView já começaria a ficar impraticável. O mesmo ocorre em WPF.
 
 O teste seguinte foi criar 10000 ordens e somente depois setar o itemsource do listView:
 
@@ -63,11 +63,11 @@ while (i++ < 10000)
     orders.Add(new OrderViewModel());
 }
 ```
-Com isso, o alvo do problema parece ter sido encontrado e está em adicionar entradas após o itemSource já ter sido definido e o não reuso de células. A criação de células novas com todas as estruturas de evento e binding por célula para manter a lista responsiva gastam muita memória. Foram tentadas outras versões do Xamarin.Forms, com o mesmo resultado. Também foi tentado criar células mais simples e constatado que menos campos nas células reduz o gasto de memória, mas não acaba com o problema de a política de reciclagem de células não ser utilizada a todo momento.
+Com isso, o alvo do problema parece ter sido encontrado e está em adicionar entradas após o itemSource já ter sido definido e ao não reuso de células. A criação de células novas com todas as estruturas de evento e bindings por célula para manter a lista responsiva gastam muita memória. Foram tentadas outras versões do Xamarin.Forms, com o mesmo resultado. Também foi tentado criar células mais simples e constatado que menos campos nas células reduz o gasto de memória, mas não acaba com o problema da política de reciclagem de células não ser utilizada a todo momento.
 
 2- CPU performance
 
-Como mostrado anteriormente, as células não sendo reusadas na ListView, as alocações delas e das estruturas necessárias para manter a lista reponsiva também se tornam um gargalo para a CPU. Enquanto as ordens são criadas a performance é prejudicada, enquanto existem updates apenas, mesmo em uma maior frequência, a responsividade continua boa.
+Como mostrado anteriormente as células não foram reusadas na ListView e as alocações delas e das estruturas necessárias para manter a lista reponsiva também se tornam um gargalo para a CPU. Enquanto as ordens são criadas a performance é prejudicada. Enquanto existem updates apenas, mesmo em uma maior frequência, a responsividade continua boa.
 
 Examplo de comportamento do processador em UWP enquanto 10000 ordens estão sendo criadas:
 ![image](https://user-images.githubusercontent.com/5822726/118736638-6f8ae980-b819-11eb-8197-7bae1c08c01b.png)
