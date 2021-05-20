@@ -1,7 +1,8 @@
 # orders-screen-xamarin
 Projeto Xamarin para teste de aplicação cross-platform em WPF e UWP. Utiliza datagrid view com dados de exemplo similares a ordens do mercado de ações. Entradas podem ser adicionadas ou atualizadas na UI.
 
-**Para executar o projeto UWP no Visual Studio, ir em configuration manager e marcar as opções build e deploy caso não estejam selecionadas. Aparentemente o VS não está retendo a configuração.**
+**Para executar o projeto UWP no Visual Studio, ir em configuration manager e marcar as opções build e deploy caso não estejam selecionadas, para release e debug. Aparentemente o VS não está retendo a configuração.**
+![image](https://user-images.githubusercontent.com/5822726/118900475-69fbd500-b8e7-11eb-8f8b-e9236830c816.png)
 
 ## 1- Layout ##
 Diferente do WPF ou Windows Forms o Xamarin não inclui um controle de datagrid nativo e as opções seriam usar uma solução não nativa existente ou criar uma nova. Foram encontrados alguns pacotes com datagrid views, como um da SyncFusion, que diz ter uma solução de alta performance cuja licença é comercial. Foi encontrado, também, o pacote akgulebubekir/Xamarin.Forms.DataGrid, não suportado por WPF. Foi decidido criar uma solução simples utilizando o controle ListView.
