@@ -18,10 +18,10 @@ Criada interface OrdersScreenFeeder e um mock que a implementa para alimentar a 
 A pattern MVVM foi utilizada como recomendado em https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/data-and-databinding com o itemSource da ListView usando um binding para uma ObservableCollection da seguinte forma: 
 
 View -> ListView  
-ViewModel -> OrdersViewModel<OrderViewModel> (ObservableCollection)  
+ViewModel -> OrdersViewModel< OrderViewModel> (ObservableCollection)  
 ViewModel -> OrderViewModel  
 
-A coleção, poderia ter referencias direto para o Model mas como decisão de projeto foi escolhido separar a camada de modelo da view e, portanto, existe um Order model e um view model.
+A coleção poderia ter referencias direto para o Model mas como decisão de projeto foi escolhido separar a camada de modelo da view e, portanto, existe um Order model e um view model.
 
 O mock usa um timer e a cada 50ms adiciona uma ordem na ObservableCollection ou faz um update, ou ambos. A cada 10 segundos simula um aumento de carga de updates em 30% das ordens existentes.
 
