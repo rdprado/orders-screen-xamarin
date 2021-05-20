@@ -116,7 +116,7 @@ Intel(R) Core(TM) i7-9750H @2.60Hz | RAM 16GB
 Visual Studio 2019  | WPF Core 3.1 e WPF Framework 4.72 | Xamarin.Forms 5.0.0.2012
 
 - Compilação  
-Foi constatado que, com as versões utilizadas do Xamarin, a compilação dos projetos em Release ficou muito mais lenta do que em Debug.
+Nas primeiras vezes que se compila o projeto UWP a compilação pode demorar e ainda não foi possível identificar o motivo.
 
 - Erros
 Apenas no UWP aparece o erro abaixo, a ser investigado, apesar de aplicação rodar e fazer os binds.
